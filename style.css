@@ -538,6 +538,48 @@ button {
   border: 1px solid var(--color-line);
   transition: transform 0.5s var(--easing), border-color 0.5s var(--easing), background 0.5s var(--easing);
   overflow: hidden;
+  /* 背景画像を入れるカード共通設定 */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 320px;
+}
+
+/* 背景画像 + ダークオーバーレイ (Unsplash画像) */
+/* 01 製造業DX戦略 — 工場・製造ライン */
+.exp-card--strategy {
+  background-image:
+    linear-gradient(180deg, rgba(7, 11, 21, 0.82) 0%, rgba(7, 11, 21, 0.95) 70%),
+    url('https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&fit=crop&w=1000&q=80');
+}
+.exp-card--strategy:hover {
+  background-image:
+    linear-gradient(180deg, rgba(7, 11, 21, 0.62) 0%, rgba(7, 11, 21, 0.88) 70%),
+    url('https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&fit=crop&w=1000&q=80');
+}
+
+/* 02 AI・画像検査の導入 — AI / ニューラルネットワーク */
+.exp-card--ai {
+  background-image:
+    linear-gradient(180deg, rgba(7, 11, 21, 0.82) 0%, rgba(7, 11, 21, 0.95) 70%),
+    url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1000&q=80');
+}
+.exp-card--ai:hover {
+  background-image:
+    linear-gradient(180deg, rgba(7, 11, 21, 0.62) 0%, rgba(7, 11, 21, 0.88) 70%),
+    url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1000&q=80');
+}
+
+/* 03 業務自動化・アプリ開発 — 分析ダッシュボード / コード */
+.exp-card--auto {
+  background-image:
+    linear-gradient(180deg, rgba(7, 11, 21, 0.82) 0%, rgba(7, 11, 21, 0.95) 70%),
+    url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80');
+}
+.exp-card--auto:hover {
+  background-image:
+    linear-gradient(180deg, rgba(7, 11, 21, 0.62) 0%, rgba(7, 11, 21, 0.88) 70%),
+    url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80');
 }
 
 /* カードのコーナー装飾 */
@@ -570,7 +612,7 @@ button {
 .exp-card:hover {
   transform: translateY(-8px);
   border-color: var(--color-gold);
-  background: linear-gradient(180deg, rgba(212, 182, 76, 0.04), rgba(14, 20, 38, 1));
+  /* 背景画像を上書きしないよう、background-image は modifier 側で制御 */
 }
 
 .exp-card:hover::before,
@@ -618,51 +660,118 @@ button {
 }
 
 /* ============================================
-   Skills (タグ)
+   Skills (画像付きカードグリッド)
    ============================================ */
-.skill-tags {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 14px;
-  max-width: 920px;
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
-.skill-tags li {
-  padding: 14px 28px;
-  border: 1px solid var(--color-line);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  color: var(--color-text);
-  background: rgba(14, 20, 38, 0.6);
-  transition: all 0.4s var(--easing);
-  cursor: default;
+.skill-card {
   position: relative;
+  height: 140px;
+  border: 1px solid var(--color-line);
+  background-color: var(--color-surface);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: default;
+  transition: transform 0.4s var(--easing), border-color 0.4s var(--easing);
 }
 
-.skill-tags li::before {
+/* スキル名 — 画像の上に重なる */
+.skill-name {
+  position: relative;
+  z-index: 2;
+  font-family: "Noto Serif JP", serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--color-text);
+  text-align: center;
+  padding: 0 12px;
+  transition: color 0.4s var(--easing);
+}
+
+/* ダークオーバーレイ (画像の上に重ねて文字を読みやすく) */
+.skill-card::before {
   content: "";
-  display: inline-block;
-  width: 4px;
-  height: 4px;
-  background: var(--color-gold);
-  margin-right: 12px;
-  vertical-align: middle;
-  transform: rotate(45deg);
-  transition: transform 0.4s var(--easing);
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(7, 11, 21, 0.78) 0%, rgba(7, 11, 21, 0.92) 100%);
+  z-index: 1;
+  transition: background 0.5s var(--easing);
 }
 
-.skill-tags li:hover {
+/* ゴールドのコーナー装飾 */
+.skill-card::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 10px;
+  height: 10px;
+  border-top: 1px solid var(--color-gold);
+  border-left: 1px solid var(--color-gold);
+  z-index: 2;
+  opacity: 0.6;
+  transition: opacity 0.4s var(--easing);
+}
+
+.skill-card:hover {
+  transform: translateY(-4px);
   border-color: var(--color-gold);
-  color: var(--color-gold);
-  transform: translateY(-3px);
-  background: rgba(212, 182, 76, 0.06);
 }
 
-.skill-tags li:hover::before {
-  transform: rotate(225deg);
+.skill-card:hover::before {
+  background: linear-gradient(160deg, rgba(7, 11, 21, 0.55) 0%, rgba(7, 11, 21, 0.82) 100%);
+}
+
+.skill-card:hover .skill-name {
+  color: var(--color-gold);
+}
+
+.skill-card:hover::after {
+  opacity: 1;
+}
+
+/* ---- 各スキルの背景画像 (Unsplash) ---- */
+.skill-card--powerapps {
+  background-image: url('https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80');
+}
+.skill-card--copilot {
+  background-image: url('https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=800&q=80');
+}
+.skill-card--aibuilder {
+  background-image: url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80');
+}
+.skill-card--dataverse {
+  background-image: url('https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=800&q=80');
+}
+.skill-card--automate {
+  background-image: url('https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=800&q=80');
+}
+.skill-card--opencv {
+  background-image: url('https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=800&q=80');
+}
+.skill-card--python {
+  background-image: url('https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&w=800&q=80');
+}
+.skill-card--data {
+  background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80');
+}
+.skill-card--process {
+  background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80');
+}
+.skill-card--quality {
+  background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80');
 }
 
 /* ============================================
@@ -836,6 +945,10 @@ button {
   .value-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .skill-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
@@ -926,6 +1039,19 @@ button {
   .value-grid {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+
+  .skill-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .skill-card {
+    height: 110px;
+  }
+
+  .skill-name {
+    font-size: 13px;
   }
 
   .exp-card {

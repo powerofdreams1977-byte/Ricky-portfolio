@@ -3,246 +3,318 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ricky | AI × Manufacturing DX Strategist。製造業向けにAI・データ活用・業務自動化・画像検査・Power Apps / Copilot活用を支援。" />
   <title>Ricky | AI × Manufacturing DX Strategist</title>
-
-  <!-- Google Fonts (見出し: 明朝系セリフ / 本文: サンセリフ) -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts: Cormorant Garamond (serif 見出し) + Inter (sans-serif 本文) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <!-- ===== Header ===== -->
-  <header class="site-header" id="siteHeader">
-    <div class="container header-inner">
-      <a href="#home" class="brand">
-        <span class="brand-mark">R</span>
-        <span class="brand-name">Ricky</span>
-      </a>
+  <!-- ========================================
+       HEADER / NAVIGATION
+  ======================================== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <!-- ロゴ -->
+      <a href="#hero" class="header__logo">Ricky</a>
 
-      <!-- ハンバーガー (モバイル用) -->
-      <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false">
-        <span></span><span></span><span></span>
+      <!-- ハンバーガーボタン（スマホ用） -->
+      <button class="header__hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
 
-      <nav class="nav" id="nav">
-        <ul>
-          <li><a href="#home">HOME</a></li>
-          <li><a href="#skills">SKILLS</a></li>
-          <li><a href="#expertise">EXPERTISE</a></li>
-          <li><a href="#contact">CONTACT</a></li>
+      <!-- ナビゲーション -->
+      <nav class="header__nav" id="nav">
+        <ul class="header__nav-list">
+          <li><a href="#hero"      class="header__nav-link">HOME</a></li>
+          <li><a href="#skills"    class="header__nav-link">SKILLS</a></li>
+          <li><a href="#expertise" class="header__nav-link">EXPERTISE</a></li>
+          <li><a href="#contact"   class="header__nav-link">CONTACT</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- ===== Hero ===== -->
-  <section class="hero" id="home">
-    <div class="container hero-inner">
-      <div class="hero-text reveal">
-        <p class="eyebrow">AI &times; MANUFACTURING DX</p>
 
-        <h1 class="hero-title">
-          <span class="title-jp">リッキー</span>
-          <span class="title-en">Ricky</span>
-        </h1>
+  <main>
 
-        <p class="hero-sub">データで製造業を変革する</p>
+    <!-- ========================================
+         HERO SECTION
+    ======================================== -->
+    <section class="hero" id="hero">
+      <!-- 背景デコレーション -->
+      <div class="hero__bg-circle hero__bg-circle--1" aria-hidden="true"></div>
+      <div class="hero__bg-circle hero__bg-circle--2" aria-hidden="true"></div>
+      <div class="hero__grid-line hero__grid-line--v1" aria-hidden="true"></div>
+      <div class="hero__grid-line hero__grid-line--v2" aria-hidden="true"></div>
 
-        <p class="hero-desc">
-          製造業の現場に根ざしたAI・デジタル変革の推進。<br />
-          データ活用から業務自動化まで、実装力を持つコンサルタントとして<br class="pc-only" />
-          企業の競争力向上を支援します。
-        </p>
+      <div class="container hero__inner">
 
-        <div class="hero-actions">
-          <a href="#expertise" class="btn btn-primary">専門領域を見る</a>
-          <a href="#contact" class="btn btn-ghost">お問い合わせ</a>
+        <!-- 左カラム：テキスト -->
+        <div class="hero__content fade-in">
+          <span class="hero__label">AI × MANUFACTURING DX</span>
+
+          <h1 class="hero__title">
+            <span class="hero__title--ja">リッキー</span>
+            <span class="hero__title--en">Ricky</span>
+          </h1>
+
+          <p class="hero__tagline">データで製造業を変革する</p>
+
+          <p class="hero__description">
+            製造業の現場に根ざしたAI・デジタル変革の推進。<br />
+            データ活用から業務自動化まで、実装力を持つコンサルタントとして<br class="pc-only" />
+            企業の競争力向上を支援します。
+          </p>
+
+          <div class="hero__cta">
+            <a href="#expertise" class="btn btn--primary">専門領域を見る</a>
+            <a href="#contact"   class="btn btn--outline">お問い合わせ</a>
+          </div>
         </div>
+
+        <!-- 右カラム：実績カード -->
+        <div class="hero__cards fade-in fade-in--delay">
+          <div class="stat-card">
+            <span class="stat-card__number">5<span class="stat-card__plus">+</span></span>
+            <span class="stat-card__label">YEARS OF EXPERIENCE</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__number">30<span class="stat-card__plus">+</span></span>
+            <span class="stat-card__label">PROJECTS DELIVERED</span>
+          </div>
+          <div class="stat-card stat-card--accent">
+            <span class="stat-card__tag">AI × MANUFACTURING DX</span>
+            <p class="stat-card__text">製造業特化型<br />AIコンサルタント</p>
+          </div>
+        </div>
+
       </div>
 
-      <!-- 右側: 実績カード縦3つ -->
-      <aside class="hero-cards">
-        <div class="metric-card reveal" style="--delay: 0.1s">
-          <span class="metric-num">5+</span>
-          <span class="metric-label">YEARS OF EXPERIENCE</span>
-        </div>
-        <div class="metric-card reveal" style="--delay: 0.25s">
-          <span class="metric-num">30+</span>
-          <span class="metric-label">PROJECTS DELIVERED</span>
-        </div>
-        <div class="metric-card reveal" style="--delay: 0.4s">
-          <span class="metric-num metric-num-sm">AI &times; MFG</span>
-          <span class="metric-label">AI &times; MANUFACTURING DX</span>
-        </div>
-      </aside>
-    </div>
-
-    <!-- 装飾用の縦テキスト -->
-    <span class="vertical-text">SCROLL DOWN</span>
-  </section>
-
-  <!-- ===== Expertise ===== -->
-  <section class="section" id="expertise">
-    <div class="container">
-      <header class="section-head reveal">
-        <p class="eyebrow">AREAS OF EXPERTISE</p>
-        <h2 class="section-title">専門領域</h2>
-        <span class="section-line"></span>
-      </header>
-
-      <div class="cards-grid">
-        <!-- Card 01 -->
-        <article class="exp-card exp-card--strategy reveal" style="--delay: 0.05s">
-          <span class="exp-num">01</span>
-          <h3 class="exp-title">製造業DX戦略</h3>
-          <p class="exp-desc">
-            現場の課題を起点に、デジタル化ロードマップを設計。
-            スモールスタートから全社展開まで一貫して支援します。
-          </p>
-        </article>
-
-        <!-- Card 02 -->
-        <article class="exp-card exp-card--ai reveal" style="--delay: 0.2s">
-          <span class="exp-num">02</span>
-          <h3 class="exp-title">AI・画像検査の導入</h3>
-          <p class="exp-desc">
-            OpenCVや機械学習を活用した外観検査・品質管理の自動化。
-            PoC設計から現場実装まで対応します。
-          </p>
-        </article>
-
-        <!-- Card 03 -->
-        <article class="exp-card exp-card--auto reveal" style="--delay: 0.35s">
-          <span class="exp-num">03</span>
-          <h3 class="exp-title">業務自動化・アプリ開発</h3>
-          <p class="exp-desc">
-            Power Apps / Copilot を活用した低コード業務アプリの構築。
-            現場ニーズに合わせた迅速な開発を実現します。
-          </p>
-        </article>
+      <!-- スクロールヒント -->
+      <div class="hero__scroll-hint" aria-hidden="true">
+        <span>SCROLL</span>
+        <div class="hero__scroll-line"></div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== Skills ===== -->
-  <section class="section section-alt" id="skills">
-    <div class="container">
-      <header class="section-head reveal">
-        <p class="eyebrow">SKILLS &amp; TOOLS</p>
-        <h2 class="section-title">スキル</h2>
-        <span class="section-line"></span>
-      </header>
 
-      <ul class="skill-grid">
-        <li class="skill-card skill-card--powerapps reveal" style="--delay: 0.02s">
-          <span class="skill-name">Power Apps</span>
-        </li>
-        <li class="skill-card skill-card--copilot reveal" style="--delay: 0.06s">
-          <span class="skill-name">Copilot Studio</span>
-        </li>
-        <li class="skill-card skill-card--aibuilder reveal" style="--delay: 0.10s">
-          <span class="skill-name">AI Builder</span>
-        </li>
-        <li class="skill-card skill-card--dataverse reveal" style="--delay: 0.14s">
-          <span class="skill-name">Dataverse</span>
-        </li>
-        <li class="skill-card skill-card--automate reveal" style="--delay: 0.18s">
-          <span class="skill-name">Power Automate</span>
-        </li>
-        <li class="skill-card skill-card--opencv reveal" style="--delay: 0.22s">
-          <span class="skill-name">OpenCV</span>
-        </li>
-        <li class="skill-card skill-card--python reveal" style="--delay: 0.26s">
-          <span class="skill-name">Python</span>
-        </li>
-        <li class="skill-card skill-card--data reveal" style="--delay: 0.30s">
-          <span class="skill-name">データ分析</span>
-        </li>
-        <li class="skill-card skill-card--process reveal" style="--delay: 0.34s">
-          <span class="skill-name">業務プロセス改善</span>
-        </li>
-        <li class="skill-card skill-card--quality reveal" style="--delay: 0.38s">
-          <span class="skill-name">製造品質改善</span>
-        </li>
-      </ul>
-    </div>
-  </section>
+    <!-- ========================================
+         EXPERTISE SECTION  専門領域
+    ======================================== -->
+    <section class="expertise section" id="expertise">
+      <div class="container">
 
-  <!-- ===== Value (実績・提供価値) ===== -->
-  <section class="section" id="value">
-    <div class="container">
-      <header class="section-head reveal">
-        <p class="eyebrow">OUR VALUE</p>
-        <h2 class="section-title">提供価値</h2>
-        <span class="section-line"></span>
-      </header>
+        <div class="section__header fade-in">
+          <span class="section__label">AREAS OF EXPERTISE</span>
+          <h2 class="section__title">専門領域</h2>
+          <div class="section__divider"></div>
+        </div>
 
-      <div class="value-grid">
-        <article class="value-card reveal" style="--delay: 0.05s">
-          <span class="value-icon" aria-hidden="true">◆</span>
-          <h3 class="value-title">現場理解</h3>
-          <p class="value-desc">
-            製造現場の課題や業務フローを理解し、机上の理論ではなく
-            実装可能な改善策を提案します。
-          </p>
-        </article>
+        <div class="expertise__grid">
 
-        <article class="value-card reveal" style="--delay: 0.2s">
-          <span class="value-icon" aria-hidden="true">◆</span>
-          <h3 class="value-title">AI活用</h3>
-          <p class="value-desc">
-            生成AI、画像解析、データ活用を組み合わせ、
-            品質・効率・判断精度の向上を支援します。
-          </p>
-        </article>
+          <article class="expertise-card expertise-card--strategy fade-in">
+            <span class="expertise-card__number">01</span>
+            <h3 class="expertise-card__title">製造業DX戦略</h3>
+            <div class="expertise-card__divider"></div>
+            <p class="expertise-card__text">
+              現場の課題を起点に、デジタル化ロードマップを設計。
+              スモールスタートから全社展開まで一貫して支援します。
+            </p>
+          </article>
 
-        <article class="value-card reveal" style="--delay: 0.35s">
-          <span class="value-icon" aria-hidden="true">◆</span>
-          <h3 class="value-title">実装支援</h3>
-          <p class="value-desc">
-            構想だけで終わらせず、アプリ化・自動化・運用定着まで
-            伴走します。
-          </p>
-        </article>
+          <article class="expertise-card expertise-card--ai fade-in fade-in--delay">
+            <span class="expertise-card__number">02</span>
+            <h3 class="expertise-card__title">AI・画像検査の導入</h3>
+            <div class="expertise-card__divider"></div>
+            <p class="expertise-card__text">
+              OpenCVや機械学習を活用した外観検査・品質管理の自動化。
+              PoC設計から現場実装まで対応します。
+            </p>
+          </article>
+
+          <article class="expertise-card expertise-card--auto fade-in fade-in--delay2">
+            <span class="expertise-card__number">03</span>
+            <h3 class="expertise-card__title">業務自動化・アプリ開発</h3>
+            <div class="expertise-card__divider"></div>
+            <p class="expertise-card__text">
+              Power Apps / Copilot を活用した低コード業務アプリの構築。
+              現場ニーズに合わせた迅速な開発を実現します。
+            </p>
+          </article>
+
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== Contact ===== -->
-  <section class="section section-contact" id="contact">
-    <div class="container contact-inner reveal">
-      <p class="eyebrow">CONTACT</p>
-      <h2 class="section-title">製造業DX・AI活用のご相談</h2>
-      <span class="section-line center"></span>
 
-      <p class="contact-desc">
-        業務改善、AI導入、Power Platform活用、画像検査自動化など、<br />
-        お気軽にご相談ください。
-      </p>
+    <!-- ========================================
+         SKILLS SECTION
+    ======================================== -->
+    <section class="skills section" id="skills">
+      <div class="container">
 
-      <a href="mailto:contact@example.com" class="btn btn-primary btn-lg">
-        お問い合わせする
-      </a>
-    </div>
-  </section>
+        <div class="section__header fade-in">
+          <span class="section__label">TECHNICAL SKILLS</span>
+          <h2 class="section__title">スキル</h2>
+          <div class="section__divider"></div>
+        </div>
 
-  <!-- ===== Footer ===== -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <span class="footer-name">Ricky</span>
-        <span class="footer-role">AI &times; Manufacturing DX Strategist</span>
+        <div class="skills__grid fade-in">
+
+          <!-- Microsoft Power Platform グループ -->
+          <div class="skill-group">
+            <h4 class="skill-group__title">Power Platform</h4>
+            <div class="skill-tags">
+              <span class="skill-tag skill-tag--gold skill-tag--powerapps">Power Apps</span>
+              <span class="skill-tag skill-tag--gold skill-tag--copilot">Copilot Studio</span>
+              <span class="skill-tag skill-tag--gold skill-tag--aibuilder">AI Builder</span>
+              <span class="skill-tag skill-tag--gold skill-tag--dataverse">Dataverse</span>
+              <span class="skill-tag skill-tag--gold skill-tag--automate">Power Automate</span>
+            </div>
+          </div>
+
+          <!-- AI / Engineering グループ -->
+          <div class="skill-group">
+            <h4 class="skill-group__title">AI / Engineering</h4>
+            <div class="skill-tags">
+              <span class="skill-tag skill-tag--opencv">OpenCV</span>
+              <span class="skill-tag skill-tag--python">Python</span>
+              <span class="skill-tag skill-tag--data">データ分析</span>
+            </div>
+          </div>
+
+          <!-- Consulting グループ -->
+          <div class="skill-group">
+            <h4 class="skill-group__title">Consulting</h4>
+            <div class="skill-tags">
+              <span class="skill-tag skill-tag--process">業務プロセス改善</span>
+              <span class="skill-tag skill-tag--quality">製造品質改善</span>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <p class="copyright">
-        &copy; <span id="year"></span> Ricky. All Rights Reserved.
-      </p>
+    </section>
+
+
+    <!-- ========================================
+         VALUE SECTION  実績・提供価値
+    ======================================== -->
+    <section class="value section" id="value">
+      <div class="container">
+
+        <div class="section__header fade-in">
+          <span class="section__label">WHAT I DELIVER</span>
+          <h2 class="section__title">提供価値</h2>
+          <div class="section__divider"></div>
+        </div>
+
+        <div class="value__grid">
+
+          <div class="value-card fade-in">
+            <div class="value-card__icon" aria-hidden="true">
+              <!-- 人物アイコン（現場理解） -->
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="18" cy="18" r="17" stroke="#D4B64C" stroke-width="1.2"/>
+                <circle cx="18" cy="13" r="4" stroke="#D4B64C" stroke-width="1.2"/>
+                <path d="M9 28 C9 22 13 19 18 19 C23 19 27 22 27 28" stroke="#D4B64C" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="value-card__title">現場理解</h3>
+            <p class="value-card__text">
+              製造現場の課題や業務フローを理解し、
+              机上の理論ではなく実装可能な改善策を提案します。
+            </p>
+          </div>
+
+          <div class="value-card fade-in fade-in--delay">
+            <div class="value-card__icon" aria-hidden="true">
+              <!-- AIアイコン -->
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="1" width="34" height="34" rx="5" stroke="#D4B64C" stroke-width="1.2"/>
+                <circle cx="18" cy="18" r="5" stroke="#D4B64C" stroke-width="1.2"/>
+                <path d="M18 8 L18 13 M18 23 L18 28 M8 18 L13 18 M23 18 L28 18" stroke="#D4B64C" stroke-width="1.2" stroke-linecap="round"/>
+                <path d="M11 11 L14.5 14.5 M21.5 21.5 L25 25 M25 11 L21.5 14.5 M14.5 21.5 L11 25" stroke="#D4B64C" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="value-card__title">AI活用</h3>
+            <p class="value-card__text">
+              生成AI、画像解析、データ活用を組み合わせ、
+              品質・効率・判断精度の向上を支援します。
+            </p>
+          </div>
+
+          <div class="value-card fade-in fade-in--delay2">
+            <div class="value-card__icon" aria-hidden="true">
+              <!-- 実装アイコン -->
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 2 L32 10 L32 26 L18 34 L4 26 L4 10 Z" stroke="#D4B64C" stroke-width="1.2"/>
+                <path d="M12 18 L16 22 L24 14" stroke="#D4B64C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="value-card__title">実装支援</h3>
+            <p class="value-card__text">
+              構想だけで終わらせず、アプリ化・自動化・
+              運用定着まで伴走します。
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         CONTACT SECTION
+    ======================================== -->
+    <section class="contact section" id="contact">
+      <!-- 背景デコレーション -->
+      <div class="contact__deco contact__deco--1" aria-hidden="true"></div>
+      <div class="contact__deco contact__deco--2" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="contact__inner fade-in">
+          <span class="section__label">CONTACT</span>
+          <h2 class="contact__title">製造業DX・AI活用のご相談</h2>
+          <div class="section__divider"></div>
+          <p class="contact__text">
+            業務改善、AI導入、Power Platform活用、画像検査自動化など、<br />
+            お気軽にご相談ください。
+          </p>
+          <a href="mailto:power.of.dreams1977@gmail.com" class="btn btn--primary btn--large">
+            お問い合わせする
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ========================================
+       FOOTER
+  ======================================== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+
+      <div class="footer__brand">
+        <span class="footer__name">Ricky</span>
+        <span class="footer__role">AI × Manufacturing DX Strategist</span>
+      </div>
+
+      <nav class="footer__nav" aria-label="フッターナビゲーション">
+        <a href="#hero"      class="footer__link">HOME</a>
+        <a href="#skills"    class="footer__link">SKILLS</a>
+        <a href="#expertise" class="footer__link">EXPERTISE</a>
+        <a href="#contact"   class="footer__link">CONTACT</a>
+      </nav>
+
+      <p class="footer__copy">&copy; 2025 Ricky. All rights reserved.</p>
     </div>
   </footer>
 

@@ -1,147 +1,178 @@
-/* ============================================
-   Ricky | AI × Manufacturing DX Strategist
-   メインスクリプト
-   ============================================ */
+/* ========================================
+   script.js
+   AI × Manufacturing DX Strategist
+======================================== */
 
 (function () {
   'use strict';
 
-  /* --------------------------------------------
-     1. ヘッダーのスクロール検知
-        スクロールするとヘッダーに背景色が付く
-     -------------------------------------------- */
-  const header = document.getElementById('siteHeader');
-  const SCROLL_THRESHOLD = 40;
+  /* ----------------------------------------
+     1. ヘッダー：スクロールで背景を追加
+  ---------------------------------------- */
+  const header = document.getElementById('header');
 
-  function handleScroll() {
-    if (window.scrollY > SCROLL_THRESHOLD) {
+  function onHeaderScroll() {
+    if (window.scrollY > 40) {
       header.classList.add('is-scrolled');
     } else {
       header.classList.remove('is-scrolled');
     }
   }
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll(); // 初期表示時にも反映
+  window.addEventListener('scroll', onHeaderScroll, { passive: true });
+  onHeaderScroll(); // 初期チェック
 
-  /* --------------------------------------------
-     2. モバイルナビゲーションのトグル
-     -------------------------------------------- */
-  const navToggle = document.getElementById('navToggle');
-  const nav = document.getElementById('nav');
+  /* ----------------------------------------
+     2. スムーズスクロール
+        href="#xxx" のリンクに適用
+  ---------------------------------------- */
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
 
-  function closeNav() {
-    nav.classList.remove('is-open');
-    navToggle.classList.remove('is-open');
-    navToggle.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-
-  function openNav() {
-    nav.classList.add('is-open');
-    navToggle.classList.add('is-open');
-    navToggle.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-  }
-
-  navToggle.addEventListener('click', function () {
-    if (nav.classList.contains('is-open')) {
-      closeNav();
-    } else {
-      openNav();
-    }
-  });
-
-  /* --------------------------------------------
-     3. ナビクリックでスムーズスクロール
-        (CSS scroll-behavior と併用、ヘッダー高さを考慮)
-     -------------------------------------------- */
-  const navLinks = document.querySelectorAll('a[href^="#"]');
-
-  navLinks.forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      const href = link.getAttribute('href');
-      if (!href || href === '#') return;
-
-      const target = document.querySelector(href);
+      const target = document.querySelector(targetId);
       if (!target) return;
 
       e.preventDefault();
 
-      // モバイルナビが開いていれば閉じる
-      if (nav.classList.contains('is-open')) {
-        closeNav();
-      }
-
       // ヘッダー高さ分オフセット
-      const headerOffset = header.offsetHeight;
-      const targetPos = target.getBoundingClientRect().top + window.scrollY - headerOffset + 1;
+      const headerH = header ? header.offsetHeight : 0;
+      const top = target.getBoundingClientRect().top + window.scrollY - headerH;
 
-      window.scrollTo({
-        top: targetPos,
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: top, behavior: 'smooth' });
+
+      // スマホドロワーを閉じる
+      closeDrawer();
     });
   });
 
-  /* --------------------------------------------
-     4. スクロール時の reveal アニメーション
-        IntersectionObserverで表示領域に入ったらクラス付与
-     -------------------------------------------- */
-  const reveals = document.querySelectorAll('.reveal');
+  /* ----------------------------------------
+     3. ハンバーガーメニュー（スマホ用ドロワー）
+  ---------------------------------------- */
+  const hamburger = document.getElementById('hamburger');
+  const nav       = document.getElementById('nav');
+
+  // オーバーレイを動的生成
+  const overlay = document.createElement('div');
+  overlay.className = 'nav-overlay';
+  document.body.appendChild(overlay);
+
+  function openDrawer() {
+    hamburger.classList.add('is-open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    nav.classList.add('is-open');
+    overlay.classList.add('is-visible');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    hamburger.classList.remove('is-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    nav.classList.remove('is-open');
+    overlay.classList.remove('is-visible');
+    document.body.style.overflow = '';
+  }
+
+  if (hamburger) {
+    hamburger.addEventListener('click', function () {
+      if (nav.classList.contains('is-open')) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    });
+  }
+
+  overlay.addEventListener('click', closeDrawer);
+
+  // ESCキーで閉じる
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeDrawer();
+  });
+
+  /* ----------------------------------------
+     4. フェードイン（Intersection Observer）
+        .fade-in クラスの要素が画面に入ったら
+        .is-visible を付与してアニメーション発火
+  ---------------------------------------- */
+  const fadeEls = document.querySelectorAll('.fade-in');
 
   if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target); // 一度表示したら監視解除
-        }
-      });
-    }, {
-      root: null,
-      rootMargin: '0px 0px -10% 0px',
-      threshold: 0.12
-    });
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            // 一度表示したら監視を解除
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,       // 12% 見えたら発火
+        rootMargin: '0px 0px -40px 0px'
+      }
+    );
 
-    reveals.forEach(function (el) {
+    fadeEls.forEach(function (el) {
       observer.observe(el);
     });
   } else {
-    // フォールバック: IntersectionObserver未対応ブラウザでは即表示
-    reveals.forEach(function (el) {
+    // IntersectionObserver 非対応ブラウザは即表示
+    fadeEls.forEach(function (el) {
       el.classList.add('is-visible');
     });
   }
 
-  /* --------------------------------------------
-     5. フッターの年号を自動更新
-     -------------------------------------------- */
-  const yearEl = document.getElementById('year');
-  if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
+  /* ----------------------------------------
+     5. アクティブナビゲーション
+        スクロール位置に応じてナビリンクに
+        .is-active を付与する
+  ---------------------------------------- */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.header__nav-link');
+
+  function updateActiveNav() {
+    const scrollY   = window.scrollY;
+    const headerH   = header ? header.offsetHeight : 0;
+    let currentId   = '';
+
+    sections.forEach(function (section) {
+      const top = section.offsetTop - headerH - 80;
+      if (scrollY >= top) {
+        currentId = section.id;
+      }
+    });
+
+    navLinks.forEach(function (link) {
+      link.classList.remove('is-active');
+      if (link.getAttribute('href') === '#' + currentId) {
+        link.classList.add('is-active');
+      }
+    });
   }
 
-  /* --------------------------------------------
-     6. ESCキーでモバイルメニューを閉じる (UX向上)
-     -------------------------------------------- */
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
-      closeNav();
-    }
-  });
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  updateActiveNav();
 
-  /* --------------------------------------------
-     7. リサイズ時、PCサイズに戻ったらモバイルメニューをリセット
-     -------------------------------------------- */
-  let resizeTimer;
-  window.addEventListener('resize', function () {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function () {
-      if (window.innerWidth > 768 && nav.classList.contains('is-open')) {
-        closeNav();
-      }
+  /* ----------------------------------------
+     6. ヒーロータイトルのタイプライター風
+        ページロード時にゆっくり表示
+  ---------------------------------------- */
+  const heroContent = document.querySelector('.hero__content');
+  if (heroContent) {
+    // ページ読み込み後、少し待ってから is-visible を付与
+    setTimeout(function () {
+      heroContent.classList.add('is-visible');
     }, 150);
-  });
+  }
+
+  const heroCards = document.querySelector('.hero__cards');
+  if (heroCards) {
+    setTimeout(function () {
+      heroCards.classList.add('is-visible');
+    }, 400);
+  }
 
 })();
